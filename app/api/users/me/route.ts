@@ -8,9 +8,7 @@ connect();
 export async function POST(request: NextRequest) {
   try {
     const userId = await getDataFromToken(request);
-    console.log("\n\n\n userId --> ", userId);
     const user = await User.findOne({ _id: userId }).select("-password");
-    console.log("\n\n\n user --> ", user);
 
     if (!user) {
       return NextResponse.json({
@@ -23,7 +21,6 @@ export async function POST(request: NextRequest) {
       data: user,
     });
   } catch (error: any) {
-    console.log("error --> ", error);
     return NextResponse.json({
       message: "Soemthing went wrong while getting user details",
       status: 500,
