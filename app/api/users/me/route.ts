@@ -7,8 +7,11 @@ connect();
 
 export async function POST(request: NextRequest) {
   try {
+    console.log("\n\n\n coming in");
     const userId = await getDataFromToken(request);
+    console.log("\n\n\n user --> ", userId);
     const user = await User.findOne({ _id: userId }).select("-password");
+    console.log("\n\n\n user --> ", user);
 
     if (!user) {
       return NextResponse.json({
